@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.App {
+  height: 100vw;
+  width: 100vw;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
