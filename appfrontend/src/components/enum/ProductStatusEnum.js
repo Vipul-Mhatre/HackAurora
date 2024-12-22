@@ -17,5 +17,6 @@ export const STATUS_ACTIONS = {
     4: "ENABLE FOR SALE",
     5: "PAY",
     6: "SELL",
-    7: "-"
+    7: "-",
+    8: "BUY"
 };

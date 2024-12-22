@@ -12,7 +12,8 @@ import "../css/PopUpModal.css";
 
 export default class PerformStatusAction extends React.Component {
 
-    getActionSpecificMethod(action){
+    getActionSpecificMethod(action) {
+        console.log(action);
         let method = null;
         if(action != null && this.props.contractName != null){
             switch(action) {
@@ -35,6 +36,9 @@ export default class PerformStatusAction extends React.Component {
                     method = this.props.contractName["buyProduct"];
                     break;
                 case STATUS_ACTIONS[6]:
+                    method = this.props.contractName["sellProductToConsumer"];
+                    break;
+                case STATUS_ACTIONS[8]:
                     method = this.props.contractName["sellProductToConsumer"];
                     break;
             }

@@ -76,6 +76,36 @@ export default class ProductDetails extends React.Component {
                             <Grid item xs>
                                 {productDetails.productStatus}
                             </Grid>
+                            <Grid item xs={6} style={{ fontWeight: "bold" }}>
+                                Producer Address/Name
+                            </Grid>
+                            <Grid item xs>
+                                {productDetails.producerAddress}
+                            </Grid>
+                            <Grid item xs={6} style={{ fontWeight: "bold" }}>
+                                Distributor Address/Name
+                            </Grid>
+                            <Grid item xs>
+                                {productDetails.distributorAddress}
+                            </Grid>
+                            <Grid item xs={6} style={{ fontWeight: "bold" }}>
+                                Retailer Address/Name
+                            </Grid>
+                            <Grid item xs>
+                                {productDetails.retailerAddresses}
+                            </Grid>
+                            <Grid item xs={6} style={{ fontWeight: "bold" }}>
+                                Distributor paying time
+                            </Grid>
+                            <Grid item xs>
+                                {productDetails.distributorTime}
+                            </Grid>
+                            <Grid item xs={6} style={{ fontWeight: "bold" }}>
+                                Retailer paying time
+                            </Grid>
+                            <Grid item xs>
+                                {productDetails.retailerTime}
+                            </Grid>
                         </Grid>
                     </DialogContentText>
                 </DialogContent>

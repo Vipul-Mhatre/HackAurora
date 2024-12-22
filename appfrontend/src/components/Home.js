@@ -31,11 +31,21 @@ const cols = [
   { field: "productName", title: "Product Name", numeric: false, align: "left" },
   { field: "productStatus", title: "Status", numeric: false, align: "left" },
   { field: "action", title: "Action", numeric: false, align: "center" },
-  { field: "productDesc", title: "Additional Details", numeric: false, align: "center" },
+  { field: "productDesc", title: "Additional Details", numeric: false, align: "center" }
+];
+
+const SusCols = [
+    { field: "productID", title: "Product ID", numeric: true, align: "left" },
+    { field: "productName", title: "Product Name", numeric: false, align: "left" },
+    { field: "productStatus", title: "Status", numeric: false, align: "left" },
+    { field: "action", title: "Action", numeric: false, align: "center" },
+    { field: "productDesc", title: "Additional Details", numeric: false, align: "center" },
+    { field: "productReport", title: "Product Sustainability Report", numeric: false, align: "center" }
 ];
 
 export default class Home extends React.Component {
 
+    
     state = { 
         tabValue: 0,
         cachedResult: null, 
@@ -119,9 +129,9 @@ export default class Home extends React.Component {
             if (productDetails["productStatus"] === 7) {
                 statusAction = STATUS_ACTIONS[7];  // Action for product status 2
             } else if (productDetails["productStatus"] === 6 && productDetails["retailerAddresses"] === ADDRESS_ZERO) {
-                statusAction = STATUS_ACTIONS[6];  // Action for status 6 with no retailer address
+                statusAction = STATUS_ACTIONS[8];  // Action for status 6 with no retailer address
             } else if (productDetails["productStatus"] > 2) {
-                statusAction = STATUS_ACTIONS[6];  // Action for status > 2
+                statusAction = STATUS_ACTIONS[8];  // Action for status > 2
             }
         }
 
@@ -170,7 +180,9 @@ export default class Home extends React.Component {
                     retailerAddresses: productDetails["retailerAddresses"],
                     productStatus: status,
                     action: action,
-                    disableActionButton: this.disableActionButton(action)
+                    disableActionButton: this.disableActionButton(action),
+                    distributorTime: new Date ((productDetails["timestamps"].buyDistTimestamp._hex)*1000).toLocaleString(),
+                    retailerTime: new Date((productDetails["timestamps"].buyRetTimestamp._hex)*1000).toLocaleString(),
                 };
                 rows.push(newRow);
             });
@@ -226,7 +238,6 @@ export default class Home extends React.Component {
     }
 
     showConfirmActionPopUp(action, prodId) {
-        console.log(action);
         this.setState({
             showConfirmAction: true,
             actionState: action,
@@ -294,7 +305,6 @@ export default class Home extends React.Component {
             const rows = this.getProductDetails();
             const activeBatches = this.fetchActiveBatches(rows);
             const previousBatches = this.fetchPreviousBatches(rows);
-
             return (
                 <div className="main-body" color="primary">
                     <Paper className="app" style={{ backgroundColor: "#92869f63", minHeight: 600 }} elevation={3}>
@@ -341,7 +351,8 @@ export default class Home extends React.Component {
                         <TabPanel value={this.state.tabValue} index={1} count={2}>
                             <BatchTable 
                                 rows={previousBatches} 
-                                cols={cols} 
+                                cols={SusCols} 
+                                sussy={true}
                                 toggleBatchDetailsPopUp={(prodRow) => this.toggleBatchDetailsPopUp(prodRow)} 
                                 showConfirmActionPopUp={(action, id) => this.showConfirmActionPopUp(action, id)}
                                 emptyRowsMessage="No sold batches yet. Try selling a batch."
@@ -371,7 +382,8 @@ export default class Home extends React.Component {
                             <ProductDetails 
                                 open={this.state.showBatchDetails} 
                                 closePopup={() => this.toggleBatchDetailsPopUp()} 
-                                product={this.state.productRow}/>
+                                product={this.state.productRow}
+                            />
                             : null
                         }
 
