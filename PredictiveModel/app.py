@@ -3,8 +3,11 @@ import joblib
 import pandas as pd
 from flask_cors import CORS
 
+import joblib
+
 # Load the pre-trained model
 model = joblib.load("sustainability_score_model.pkl")
+joblib.dump(model, 'sustainability_score_model.pkl', compress=3)
 
 # Initialize Flask app
 app = Flask(__name__)
