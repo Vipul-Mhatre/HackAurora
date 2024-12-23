@@ -6,5 +6,3 @@ appfrontend/src/contracts
 #Hardhat files
 cache
 artifacts
-
-/PredictiveModel/sustainability_score_model.pkl
